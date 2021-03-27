@@ -18,9 +18,9 @@ import Complaints from "./components/Admin/Complaints";
 
 import Students from "./components/Admin/Students";
 import Staff from "./components/Admin/Staff";
-import Laundry from "./components/Laundry";
 import Error from "./components/Error";
 import Slot from "./components/Slot";
+import Notifications from "./components/Notifications";
 
 function App() {
   //state
@@ -44,6 +44,7 @@ function App() {
             setLogin={setLogin}
             user={user}
             setUser={setUser}
+            setNotifStatus={setNotifStatus}
           />
           <SideBar
             user={user}
@@ -51,6 +52,11 @@ function App() {
             setSideBarStatus={setSideBarStatus}
             setLogin={setLogin}
             setUser={setUser}
+          />
+
+          <Notifications
+            notifStatus={notifStatus}
+            setNotifStatus={setNotifStatus}
           />
           <Switch>
             <Route path="/" exact>
@@ -70,9 +76,6 @@ function App() {
             </Route>
             <Route path="/attendance" exact>
               <Attendance />
-            </Route>
-            <Route path="/laundry" exact>
-              <Laundry />
             </Route>
 
             <Route path="/admin" exact>

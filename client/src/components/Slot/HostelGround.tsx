@@ -2,7 +2,10 @@ import styled from "styled-components";
 import Button from "../Button";
 import Divider from "../Divider";
 
-const HostelGround = () => {
+const HostelGround: React.FC<{
+  setMessage: React.Dispatch<React.SetStateAction<string>>;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setMessage, setModal }) => {
   const time = [
     "8-9AM",
     "9-10AM",
@@ -23,6 +26,11 @@ const HostelGround = () => {
     "12-1AM",
   ];
 
+  const ClickHandler = (t: string) => {
+    setModal(true);
+    setMessage(`Confirm the slot for ${t}`);
+  };
+
   return (
     <StyledHostelGround>
       <div>
@@ -30,7 +38,7 @@ const HostelGround = () => {
         <Divider />
         <ul>
           {time.map((t, index) => (
-            <Button key={index} m={t} />
+            <Button key={index} m={t} onClick={() => ClickHandler(t)} />
           ))}
         </ul>
       </div>

@@ -70,9 +70,9 @@ const Slot = () => {
           setModal={setModal}
         />
       ) : selected === "ground" ? (
-        <HostelGround />
+        <HostelGround setMessage={setMessage} setModal={setModal} />
       ) : (
-        <ReadingRoom />
+        <ReadingRoom setMessage={setMessage} setModal={setModal} />
       )}
       {modal && (
         <StyledModal>

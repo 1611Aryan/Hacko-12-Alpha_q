@@ -70,9 +70,6 @@ const SideBar: React.FC<SideBarInterface> = ({
                 <Link to="/menu"> View Menu</Link>
               </li>
               <li onClick={HideSideBar}>
-                <Link to="/laundry"> Laundry</Link>
-              </li>
-              <li onClick={HideSideBar}>
                 <Link to="/request-service"> Request for cleaning</Link>
               </li>
               <li onClick={HideSideBar}>

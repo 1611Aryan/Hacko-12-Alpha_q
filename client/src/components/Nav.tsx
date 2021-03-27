@@ -27,6 +27,7 @@ interface NavInterface {
       access: string;
     } | null>
   >;
+  setNotifStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Nav: React.FC<NavInterface> = ({
@@ -35,11 +36,15 @@ const Nav: React.FC<NavInterface> = ({
   setLogin,
   user,
   setUser,
+  setNotifStatus,
 }) => {
   //Handlers
 
   const showSideBar = () => {
-    setSideBarStatus(!sideBarStatus);
+    setSideBarStatus(true);
+  };
+  const showNotifications = () => {
+    setNotifStatus(true);
   };
 
   return (
@@ -58,7 +63,7 @@ const Nav: React.FC<NavInterface> = ({
           </div>
           {user?.access === "student" ? (
             <div className="buttons">
-              <FontAwesomeIcon icon={faBell} />
+              <FontAwesomeIcon icon={faBell} onClick={showNotifications} />
               <FontAwesomeIcon icon={faBars} onClick={showSideBar} />
             </div>
           ) : (
@@ -81,10 +86,8 @@ const StyledNav = styled.nav`
   justify-content: space-between;
   align-items: center;
   a {
-    width: 100%;
   }
   h1 {
-    width: 100%;
     font-size: clamp(1.15rem, 3vw, 2rem);
   }
 `;
