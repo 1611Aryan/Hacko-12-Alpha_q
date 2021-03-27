@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import menuBG from "./../img/menuBg.jpg";
+import menuBG from "./../../img/menuBg.jpg";
 
 const food = [
   [

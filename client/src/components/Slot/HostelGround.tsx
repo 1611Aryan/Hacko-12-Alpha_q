@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Button from "../Button";
-import Divider from "../Divider";
+import Button from "../Styled/Button";
+import Divider from "../Styled/Divider";
 
 const HostelGround: React.FC<{
   setMessage: React.Dispatch<React.SetStateAction<string>>;
@@ -51,6 +51,9 @@ const StyledHostelGround = styled.div`
   z-index: 2;
   padding: 1rem;
   color: white;
+  h3 {
+    font-size: 1.5rem;
+  }
   ul {
     width: 100%;
     display: flex;

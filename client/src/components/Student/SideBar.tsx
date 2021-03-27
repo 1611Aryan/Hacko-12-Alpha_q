@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import placeholderImage from "./../img/placeholder.png";
+import placeholderImage from "./../../img/placeholder.png";
 
 interface SideBarInterface {
   sideBarStatus: boolean;
@@ -162,6 +162,10 @@ const StyledOtherLinks = styled.div`
   }
   li {
     transition: transform ease 0.3s;
+    cursor: pointer;
+    a {
+      padding: 0.5rem;
+    }
   }
   li:hover {
     transform: scale(1.1);

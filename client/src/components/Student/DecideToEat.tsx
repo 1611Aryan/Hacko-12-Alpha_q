@@ -1,6 +1,6 @@
 import axios from "axios";
 import styled from "styled-components";
-import food from "./../img/food.jpg";
+import food from "./../../img/food.jpg";
 
 const DecideToEat: React.FC<{
   setUser: any;

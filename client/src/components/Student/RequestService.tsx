@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import yellowGradient from "./../img/yellow-gradient.jpg";
+import yellowGradient from "./../../img/yellow-gradient.jpg";
 
 const RequestService: React.FC<{ user: any }> = ({ user }) => {
   //URL

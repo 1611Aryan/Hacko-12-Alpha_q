@@ -1,31 +1,19 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+
 import { useHistory } from "react-router-dom";
-import bg from "./../img/sky.jpg";
-import axios from "axios";
-import Divider from "./Divider";
+import books from "./../../img/book1.jpg";
+
+import Divider from "../Styled/Divider";
+import illus from "./../../img/5 SCENE 1.png";
 
 const Home: React.FC<{ user: any }> = ({ user }) => {
   const history = useHistory();
-  const [quote, setQuote] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(
-          "https://quotes.rest/qod.json?category=inspire"
-        );
-        setQuote(res.data.contents.quotes[0].quote);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
 
   if (user.access === "student") {
     return (
       <StyledHome>
-        <img src={bg} alt="" />
+        <img className="bg" src={books} alt="" />
+        <div className="overlay"></div>
         <div className="content">
           <h1>Hello {user?.name}</h1>
           <Divider />
@@ -42,7 +30,8 @@ const Home: React.FC<{ user: any }> = ({ user }) => {
               <span>Hostel: {user?.hostel}</span>
             </div>
           </div>
-          <div className="quote">{quote}</div>
+          {/* <div className="quote">{quote}</div> */}{" "}
+          <img className="illus" src={illus} alt="" />
         </div>
       </StyledHome>
     );
@@ -61,7 +50,8 @@ const StyledHome = styled.main`
   justify-content: center;
   align-items: center;
   position: relative;
-  img {
+  color: white;
+  .bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -69,6 +59,16 @@ const StyledHome = styled.main`
     height: 100%;
     object-fit: cover;
     z-index: 1;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    z-index: 2;
   }
   .content {
     width: 100%;
@@ -87,10 +87,11 @@ const StyledHome = styled.main`
     height: auto;
     padding: 1rem 4rem 1rem 1rem;
     border: 2px solid #fff;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    color: black;
     .row {
       width: 100%;
       display: flex;
@@ -109,6 +110,10 @@ const StyledHome = styled.main`
     font-family: "Satisfy", cursive;
     color: white;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .illus {
+    z-index: -1;
+    object-fit: cover;
   }
 `;
 

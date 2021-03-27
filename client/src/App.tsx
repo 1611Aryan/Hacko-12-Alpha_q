@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
-import Home from "./components/Home";
-import SideBar from "./components/SideBar";
-import DecideToEat from "./components/DecideToEat";
-import Menu from "./components/Menu";
-import RequestService from "./components/RequestService";
-import Attendance from "./components/Attendance";
+import Home from "./components/Student/Home";
+import SideBar from "./components/Student/SideBar";
+import Menu from "./components/Student/Menu";
+import RequestService from "./components/Student/RequestService";
+import Attendance from "./components/Student/Attendance";
 
 import Login from "./components/login";
 import useLocalStorage from "./Hooks/useLocalStorage";
@@ -65,9 +64,7 @@ function App() {
             <Route path="/slot" exact>
               <Slot />
             </Route>
-            <Route path="/choose" exact>
-              <DecideToEat setUser={setUser} user={user} />
-            </Route>
+
             <Route path="/menu" exact>
               <Menu />
             </Route>
