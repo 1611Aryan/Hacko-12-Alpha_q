@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import Divider from "../Styled/Divider";
+import Divider from "../../Styled/Divider";
 import Meal from "./Meal";
-import hostel from "./../../img/hostel.jpg";
+import hostel from "./../../../img/hostel.jpg";
 import HostelGround from "./HostelGround";
 import ReadingRoom from "./ReadingRoom";
-import Button from "../Styled/Button";
+import Button from "../../Styled/Button";
 
 const Slot = () => {
   //State

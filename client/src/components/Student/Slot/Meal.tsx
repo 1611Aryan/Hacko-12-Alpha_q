@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { useState } from "react";
-import Divider from "../Styled/Divider";
-import Button from "../Styled/Button";
+import Divider from "../../Styled/Divider";
+import Button from "../../Styled/Button";
 
 const Meal: React.FC<{
   meal: string;

@@ -43,14 +43,15 @@ const AdminPanel: React.FC<{
         </StyledOption>
         <StyledOption
           style={{
-            background: "#FFF962",
+            background: "#B8FF5D",
           }}
         >
           <div className="overlay"></div>
-          <Link to="/admin/attendance">
-            <span> Attendance</span>
+          <Link to="/admin/students">
+            <span> Students</span>
           </Link>
         </StyledOption>
+
         <StyledOption
           style={{
             background: "#48D3FF",
@@ -63,12 +64,12 @@ const AdminPanel: React.FC<{
         </StyledOption>
         <StyledOption
           style={{
-            background: "#B8FF5D",
+            background: "#FFF962",
           }}
         >
           <div className="overlay"></div>
-          <Link to="/admin/students">
-            <span> Students</span>
+          <Link to="/admin/slots">
+            <span>Slots</span>
           </Link>
         </StyledOption>
         <StyledOption
@@ -77,8 +78,8 @@ const AdminPanel: React.FC<{
           }}
         >
           <div className="overlay"></div>
-          <Link to="/admin/staff">
-            <span>Staff</span>
+          <Link to="/admin/alert">
+            <span>Send Alerts</span>
           </Link>
         </StyledOption>
         <StyledOption

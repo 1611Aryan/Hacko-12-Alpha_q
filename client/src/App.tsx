@@ -12,14 +12,14 @@ import Login from "./components/login";
 import useLocalStorage from "./Hooks/useLocalStorage";
 import AdminPanel from "./components/Admin/AdminPanel";
 import MessStatus from "./components/Admin/MessStatus";
-import AttendanceAdmin from "./components/Admin/AttendanceAdmin";
+import SlotAdmin from "./components/Admin/Slots";
 import Complaints from "./components/Admin/Complaints";
 
 import Students from "./components/Admin/Students";
-import Staff from "./components/Admin/Staff";
+import Alert from "./components/Admin/Alert";
 import Error from "./components/Error";
-import Slot from "./components/Slot";
-import Notifications from "./components/Notifications";
+import Slot from "./components/Student/Slot";
+import Notifications from "./components/Student/Notifications";
 
 function App() {
   //state
@@ -81,8 +81,8 @@ function App() {
             <Route path="/admin/mess" exact>
               <MessStatus />
             </Route>
-            <Route path="/admin/attendance" exact>
-              <AttendanceAdmin />
+            <Route path="/admin/slots" exact>
+              <SlotAdmin />
             </Route>
             <Route path="/admin/complaints" exact>
               <Complaints />
@@ -90,8 +90,8 @@ function App() {
             <Route path="/admin/students" exact>
               <Students />
             </Route>
-            <Route path="/admin/staff" exact>
-              <Staff />
+            <Route path="/admin/alert" exact>
+              <Alert />
             </Route>
             <Route path="/">
               <Error />

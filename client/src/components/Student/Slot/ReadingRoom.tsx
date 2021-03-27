@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Button from "../Styled/Button";
-import Divider from "../Styled/Divider";
+import Button from "../../Styled/Button";
+import Divider from "../../Styled/Divider";
 
-const HostelGround: React.FC<{
+const ReadingRoom: React.FC<{
   setMessage: React.Dispatch<React.SetStateAction<string>>;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ setMessage, setModal }) => {
@@ -32,9 +32,9 @@ const HostelGround: React.FC<{
   };
 
   return (
-    <StyledHostelGround>
+    <StyledReadingRoom>
       <div>
-        <h3>Confirm Your Slot for Hostel Ground</h3>
+        <h3>Confirm Your Slot for Reading Room</h3>
         <Divider />
         <ul>
           {time.map((t, index) => (
@@ -42,11 +42,11 @@ const HostelGround: React.FC<{
           ))}
         </ul>
       </div>
-    </StyledHostelGround>
+    </StyledReadingRoom>
   );
 };
 
-const StyledHostelGround = styled.div`
+const StyledReadingRoom = styled.div`
   position: relative;
   z-index: 2;
   padding: 1rem;
@@ -60,7 +60,7 @@ const StyledHostelGround = styled.div`
     justify-content: flex-start;
     align-items: center;
     list-style-type: none;
-    --bg: coral;
+    --bg: #4e4e4e;
     --color: white;
     flex-wrap: wrap;
     gap: 1rem;
@@ -71,4 +71,4 @@ const StyledHostelGround = styled.div`
   } */
 `;
 
-export default HostelGround;
+export default ReadingRoom;
