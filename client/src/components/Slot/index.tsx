@@ -1,20 +1,23 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import hostel from "./../img/hostel.jpg";
-import Divider from "./Divider";
-import { Link } from "react-router-dom";
+import Divider from "../Divider";
+import Meal from "./Meal";
+import hostel from "./../../img/hostel.jpg";
+import HostelGround from "./HostelGround";
+import ReadingRoom from "./ReadingRoom";
+import Button from "../Button";
 
-const Hungry: React.FC = () => {
+const Slot = () => {
   //State
   const [meal, setMeal] = useState("Breakfast");
   const [time, setTime] = useState([""]);
-  const [message, setMessage] = useState("Confirm the slot for 7-7:20AM");
+  const [selected, setSelected] = useState("meal");
+  const [message, setMessage] = useState("");
   const [modal, setModal] = useState(false);
 
-  //Component did mount
+  //Component did Mount
   useEffect(() => {
     const time = new Date().getHours();
-    console.log(time);
     if (time <= 8) {
       setMeal("Breakfast");
       setTime(["7-7:20AM", "7:20-7:40AM", "7:40-8:00AM"]);
@@ -42,50 +45,35 @@ const Hungry: React.FC = () => {
   }, []);
 
   //Handlers
-  const openModal = (t: number, m?: string) => {
-    if (t === 0) {
-      setMessage(`Confirm the slot for ${m}`);
-    } else {
-      setMessage(`Are you sure you won't eat ${meal}`);
-    }
-    setModal(true);
+  const change = (t: string) => {
+    setSelected(t);
   };
   const closeModal = () => {
     setModal(false);
   };
 
   return (
-    <StyledHome>
+    <StyledSlot>
       <img src={hostel} alt="hostel-hero" />
       <div className="overlay"></div>
-      <div className="content">
-        <div className="slot">
-          <h3>Confirm Your Slot for {meal}</h3>
-          <Divider />
-          <ul>
-            {time.map((t, index) => (
-              <li key={index} onClick={() => openModal(0, t)}>
-                <div className="cover"></div>
-                <span> {t}</span>
-              </li>
-            ))}
-          </ul>
-          <p>
-            If no slot is confirmed, you'll automatically be assigned the last
-            given slot.
-          </p>
-        </div>
-        <div className="eating">
-          <h3>Not having {meal} today?</h3>
-          <Divider />
-          <ul>
-            <li onClick={() => openModal(1)}>
-              <div className="cover"></div>
-              <span>Skip</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <StyledSlotTypes>
+        <Button m={meal} onClick={() => change("meal")} />
+        <Button m={"Hostel Grounds"} onClick={() => change("ground")} />
+        <Button m={"Reading Room"} onClick={() => change("reading")} />
+      </StyledSlotTypes>
+      <Divider />
+      {selected === "meal" ? (
+        <Meal
+          meal={meal}
+          time={time}
+          setMessage={setMessage}
+          setModal={setModal}
+        />
+      ) : selected === "ground" ? (
+        <HostelGround />
+      ) : (
+        <ReadingRoom />
+      )}
       {modal && (
         <StyledModal>
           <div className="alert">
@@ -101,11 +89,11 @@ const Hungry: React.FC = () => {
           </div>
         </StyledModal>
       )}
-    </StyledHome>
+    </StyledSlot>
   );
 };
 
-const StyledHome = styled.main`
+const StyledSlot = styled.section`
   position: relative;
   overflow: hidden;
   width: 100vw;
@@ -129,66 +117,21 @@ const StyledHome = styled.main`
     backdrop-filter: blur(1px);
     z-index: 2;
   }
-  .content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-    color: white;
-    padding: 1rem;
-    h3 {
-      font-size: 1.5rem;
-    }
-    ul {
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      list-style-type: none;
-    }
-    li {
-      position: relative;
-      overflow: hidden;
-      padding: 1rem 2rem;
-      background: #fff;
-      color: teal;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all ease-in-out 0.3s;
-      .cover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 110%;
-        height: 110%;
-        transform: translate(-100%);
-        background: teal;
-        transition: all ease-in-out 0.3s;
-      }
-      span {
-        position: relative;
-        z-index: 2;
-      }
-      &:hover {
-        color: white;
-        .cover {
-          transform: translate(0);
-        }
-      }
-    }
-    li + li {
-      margin-left: 1rem;
-    }
-    p {
-      margin: 1rem 0;
-      color: #fff238;
-      &:hover {
-        color: #fff45d;
-      }
-    }
-    .eating {
-      padding: 2rem 0;
-    }
+`;
+
+const StyledSlotTypes = styled.ul`
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  padding: 1rem;
+  --bg: teal;
+  --color: white;
+  li + li {
+    margin-left: 1rem;
   }
 `;
 
@@ -248,5 +191,4 @@ const StyledModal = styled.div`
     }
   }
 `;
-
-export default Hungry;
+export default Slot;

@@ -64,7 +64,7 @@ const SideBar: React.FC<SideBarInterface> = ({
           {user && user.access === "student" ? (
             <>
               <li onClick={HideSideBar}>
-                <Link to="/hunger">Book Time Slot</Link>
+                <Link to="/slot">Book Time Slot</Link>
               </li>
               <li onClick={HideSideBar}>
                 <Link to="/menu"> View Menu</Link>

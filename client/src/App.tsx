@@ -18,8 +18,9 @@ import Complaints from "./components/Admin/Complaints";
 
 import Students from "./components/Admin/Students";
 import Staff from "./components/Admin/Staff";
-import Hungry from "./components/Hungry";
 import Laundry from "./components/Laundry";
+import Error from "./components/Error";
+import Slot from "./components/Slot";
 
 function App() {
   //state
@@ -55,8 +56,8 @@ function App() {
             <Route path="/" exact>
               <Home user={user} />
             </Route>
-            <Route path="/hunger" exact>
-              <Hungry />
+            <Route path="/slot" exact>
+              <Slot />
             </Route>
             <Route path="/choose" exact>
               <DecideToEat setUser={setUser} user={user} />
@@ -91,6 +92,9 @@ function App() {
             </Route>
             <Route path="/admin/staff" exact>
               <Staff />
+            </Route>
+            <Route path="/">
+              <Error />
             </Route>
           </Switch>
         </>
