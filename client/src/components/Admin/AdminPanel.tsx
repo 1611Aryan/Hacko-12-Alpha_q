@@ -1,107 +1,94 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useUser } from "../../Context/userProvider";
 
 const AdminPanel: React.FC<{
-  login: any;
   setLogin: any;
-  setUser: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      rollNumber: string;
-      year: string;
-      hostel: string;
-      password: string;
-      access: string;
-    } | null>
-  >;
-}> = ({ login, setLogin, setUser }) => {
+}> = ({ setLogin }) => {
+  //
+  const { setUser } = useUser();
+  const history = useHistory();
+
   const logout = () => {
     setLogin({
       status: false,
       access: null,
     });
     setUser(null);
-    window.history.pushState({}, "", "/");
-    window.location.reload();
+    history.push("/");
   };
 
-  if (login.access === "admin")
-    return (
-      <StyledAdminPanel>
-        <StyledOption
-          style={{
-            background: "#FF6E6E",
-          }}
-        >
-          <div className="overlay"></div>
-          <Link to="/admin/mess">
-            <span> Mess Status</span>
-          </Link>
-        </StyledOption>
-        <StyledOption
-          style={{
-            background: "#B8FF5D",
-          }}
-        >
-          <div className="overlay"></div>
-          <Link to="/admin/students">
-            <span> Students</span>
-          </Link>
-        </StyledOption>
+  return (
+    <StyledAdminPanel>
+      <StyledOption
+        style={{
+          background: "#FF6E6E",
+        }}
+      >
+        <div className="overlay"></div>
+        <Link to="/admin/mess">
+          <span> Mess Status</span>
+        </Link>
+      </StyledOption>
+      <StyledOption
+        style={{
+          background: "#B8FF5D",
+        }}
+      >
+        <div className="overlay"></div>
+        <Link to="/admin/students">
+          <span> Students</span>
+        </Link>
+      </StyledOption>
 
-        <StyledOption
-          style={{
-            background: "#48D3FF",
-          }}
-        >
-          <div className="overlay"></div>
-          <Link to="/admin/complaints">
-            <span> Complaints</span>
-          </Link>
-        </StyledOption>
-        <StyledOption
-          style={{
-            background: "#FFF962",
-          }}
-        >
-          <div className="overlay"></div>
-          <Link to="/admin/slots">
-            <span>Slots</span>
-          </Link>
-        </StyledOption>
-        <StyledOption
-          style={{
-            background: "#FFAB48",
-          }}
-        >
-          <div className="overlay"></div>
-          <Link to="/admin/alert">
-            <span>Send Alerts</span>
-          </Link>
-        </StyledOption>
-        <StyledOption
-          style={{
-            background: "#C173FF",
-          }}
-        >
-          <div className="overlay"></div>
-          <Link to="/" onClick={logout}>
-            <span>
-              Logout &nbsp;
-              <FontAwesomeIcon icon={faSignOutAlt}></FontAwesomeIcon>
-            </span>
-          </Link>
-        </StyledOption>
-      </StyledAdminPanel>
-    );
-  else {
-    window.location.reload();
-    window.history.pushState({}, "", "/");
-    return null;
-  }
+      <StyledOption
+        style={{
+          background: "#48D3FF",
+        }}
+      >
+        <div className="overlay"></div>
+        <Link to="/admin/complaints">
+          <span> Complaints</span>
+        </Link>
+      </StyledOption>
+      <StyledOption
+        style={{
+          background: "#FFF962",
+        }}
+      >
+        <div className="overlay"></div>
+        <Link to="/admin/slots">
+          <span>Slots</span>
+        </Link>
+      </StyledOption>
+      <StyledOption
+        style={{
+          background: "#FFAB48",
+        }}
+      >
+        <div className="overlay"></div>
+        <Link to="/admin/alert">
+          <span>Send Alerts</span>
+        </Link>
+      </StyledOption>
+      <StyledOption
+        style={{
+          background: "#C173FF",
+        }}
+      >
+        <div className="overlay"></div>
+        <Link to="/" onClick={logout}>
+          <span>
+            Logout &nbsp;
+            <FontAwesomeIcon icon={faSignOutAlt}></FontAwesomeIcon>
+          </span>
+        </Link>
+      </StyledOption>
+    </StyledAdminPanel>
+  );
 };
 
 const StyledAdminPanel = styled.section`

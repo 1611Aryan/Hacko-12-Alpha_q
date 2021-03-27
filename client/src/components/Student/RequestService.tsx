@@ -2,13 +2,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import yellowGradient from "./../../img/yellow-gradient.jpg";
+import { useUser } from "../../Context/userProvider";
 
-const RequestService: React.FC<{ user: any }> = ({ user }) => {
+const RequestService: React.FC = () => {
   //URL
   const URL =
     process.env.NODE_ENV === "production"
       ? "/administrator/complaints"
       : "http://localhost:5000/administrator/complaints";
+
+  //
+  const { user } = useUser();
 
   //State
   const [message, setMessage] = useState<null | string>(null);
@@ -27,7 +31,6 @@ const RequestService: React.FC<{ user: any }> = ({ user }) => {
   });
 
   //Handlers
-
   const changeHandler = (
     e:
       | React.ChangeEvent<HTMLInputElement>

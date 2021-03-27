@@ -4,39 +4,23 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import placeholderImage from "./../../img/placeholder.png";
+import { useUser } from "../../Context/userProvider";
 
 interface SideBarInterface {
   sideBarStatus: boolean;
   setSideBarStatus: React.Dispatch<React.SetStateAction<boolean>>;
-  user: {
-    name: string;
-    rollNumber: string;
-    year: string;
-    hostel: string;
-    password: string;
-    access: string;
-  } | null;
-  setLogin: any;
 
-  setUser: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      rollNumber: string;
-      year: string;
-      hostel: string;
-      password: string;
-      access: string;
-    } | null>
-  >;
+  setLogin: any;
 }
 
 const SideBar: React.FC<SideBarInterface> = ({
   setSideBarStatus,
   sideBarStatus,
-  user,
   setLogin,
-  setUser,
 }) => {
+  //
+  const { user, setUser } = useUser();
+
   const logout = () => {
     setLogin({
       status: false,

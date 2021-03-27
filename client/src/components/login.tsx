@@ -6,20 +6,11 @@ import logo from "./../img/thaparLogo.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
+import { useUser } from "../Context/userProvider";
 
 const Login: React.FC<{
   setLogin: any;
-  setUser: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      rollNumber: string;
-      year: string;
-      hostel: string;
-      password: string;
-      responded: boolean;
-    } | null>
-  >;
-}> = ({ setLogin, setUser }) => {
+}> = ({ setLogin }) => {
   //urls
   const URL =
     process.env.NODE_ENV === "production"
@@ -27,7 +18,6 @@ const Login: React.FC<{
       : "http://localhost:5000/student/login";
 
   //state
-
   const [credentials, setCredentials] = useState<{
     rollNumber: null | string;
     password: null | string;
@@ -37,6 +27,9 @@ const Login: React.FC<{
   });
 
   const [message, setMessage] = useState<null | string>(null);
+
+  //
+  const { setUser } = useUser();
 
   //handlers
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

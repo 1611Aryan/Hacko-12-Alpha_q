@@ -4,29 +4,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faBuilding, faBell } from "@fortawesome/free-solid-svg-icons";
 import placeholderImage from "./../img/placeholder.png";
+import { useUser } from "../Context/userProvider";
 
 interface NavInterface {
   sideBarStatus: boolean;
   setSideBarStatus: React.Dispatch<React.SetStateAction<boolean>>;
   setLogin: any;
-  user: {
-    name: string;
-    rollNumber: string;
-    year: string;
-    hostel: string;
-    password: string;
-    access: string;
-  } | null;
-  setUser: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      rollNumber: string;
-      year: string;
-      hostel: string;
-      password: string;
-      access: string;
-    } | null>
-  >;
   setNotifStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -34,12 +17,12 @@ const Nav: React.FC<NavInterface> = ({
   setSideBarStatus,
   sideBarStatus,
   setLogin,
-  user,
-  setUser,
   setNotifStatus,
 }) => {
-  //Handlers
+  //
+  const { user, setUser } = useUser();
 
+  //Handlers
   const showSideBar = () => {
     setSideBarStatus(true);
   };

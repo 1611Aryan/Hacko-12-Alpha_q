@@ -1,44 +1,39 @@
 import styled from "styled-components";
 
-import { useHistory } from "react-router-dom";
 import books from "./../../img/book1.jpg";
 
 import Divider from "../Styled/Divider";
 import illus from "./../../img/5 SCENE 1.png";
+import { useUser } from "../../Context/userProvider";
 
-const Home: React.FC<{ user: any }> = ({ user }) => {
-  const history = useHistory();
+const Home: React.FC = () => {
+  const { user } = useUser();
 
-  if (user.access === "student") {
-    return (
-      <StyledHome>
-        <img className="bg" src={books} alt="" />
-        <div className="overlay"></div>
-        <div className="content">
-          <h1>Hello {user?.name}</h1>
-          <Divider />
-          <div className="information">
-            <div className="row">
-              <span>Roll Number: {user?.rollNumber}</span>
-              <span>Year: {user?.year}</span>
-            </div>
-            <div className="row">
-              <span>Stream: {user?.stream}</span>
-              <span>Batch: {user?.batch}</span>
-            </div>
-            <div className="row">
-              <span>Hostel: {user?.hostel}</span>
-            </div>
+  return (
+    <StyledHome>
+      <img className="bg" src={books} alt="" />
+      <div className="overlay"></div>
+      <div className="content">
+        <h1>Hello {user?.name}</h1>
+        <Divider />
+        <div className="information">
+          <div className="row">
+            <span>Roll Number: {user?.rollNumber}</span>
+            <span>Year: {user?.year}</span>
           </div>
-          {/* <div className="quote">{quote}</div> */}{" "}
-          <img className="illus" src={illus} alt="" />
+          <div className="row">
+            <span>Stream: {user?.stream}</span>
+            <span>Batch: {user?.batch}</span>
+          </div>
+          <div className="row">
+            <span>Hostel: {user?.hostel}</span>
+          </div>
         </div>
-      </StyledHome>
-    );
-  } else {
-    history.push("/");
-    return null;
-  }
+        {/* <div className="quote">{quote}</div> */}{" "}
+        <img className="illus" src={illus} alt="" />
+      </div>
+    </StyledHome>
+  );
 };
 
 const StyledHome = styled.main`
