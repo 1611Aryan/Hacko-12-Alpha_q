@@ -27,7 +27,7 @@ app.use("/slots", slotsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
-  app.use("/choose", express.static(path.join(__dirname, "client/build")));
+  app.use("/slot", express.static(path.join(__dirname, "client/build")));
   app.use("/menu", express.static(path.join(__dirname, "client/build")));
   app.use(
     "/request-service",
@@ -37,9 +37,10 @@ if (process.env.NODE_ENV === "production") {
   app.use("/warden", express.static(path.join(__dirname, "client/build")));
   app.use("/warden/mess", express.static(path.join(__dirname, "client/build")));
   app.use(
-    "/warden/attendance",
+    "/warden/slots",
     express.static(path.join(__dirname, "client/build"))
   );
+
   app.use(
     "/warden/complaints",
     express.static(path.join(__dirname, "client/build"))
@@ -49,7 +50,28 @@ if (process.env.NODE_ENV === "production") {
     express.static(path.join(__dirname, "client/build"))
   );
   app.use(
-    "/warden/staff",
+    "/warden/alert",
+    express.static(path.join(__dirname, "client/build"))
+  );
+  app.use("/teacher", express.static(path.join(__dirname, "client/build")));
+  app.use(
+    "/teacher/schedule",
+    express.static(path.join(__dirname, "client/build"))
+  );
+  app.use(
+    "/teacher/students",
+    express.static(path.join(__dirname, "client/build"))
+  );
+  app.use(
+    "/teacher/assignment",
+    express.static(path.join(__dirname, "client/build"))
+  );
+  app.use(
+    "/teacher/addMarks",
+    express.static(path.join(__dirname, "client/build"))
+  );
+  app.use(
+    "/teacher/alert",
     express.static(path.join(__dirname, "client/build"))
   );
 }
