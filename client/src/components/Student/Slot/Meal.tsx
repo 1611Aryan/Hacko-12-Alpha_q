@@ -7,13 +7,18 @@ const Meal: React.FC<{
   time: string[];
   setMessage: React.Dispatch<React.SetStateAction<string>>;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ meal, time, setMessage, setModal }) => {
-  //State
+  setUrl: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ meal, time, setMessage, setModal, setUrl }) => {
+  const URL =
+    process.env.NODE_ENV === "production"
+      ? "/slots"
+      : "http://localhost:5000/slots";
 
   //Handlers
   const openModal = (t: number, m?: string) => {
     if (t === 0) {
       setMessage(`Confirm the slot for ${m}`);
+      setUrl(`${URL}/${m}`);
     } else {
       setMessage(`Are you sure you won't eat ${meal}`);
     }

@@ -7,14 +7,18 @@ const TeacherRoute: React.FC<{
   exact?: boolean;
 }> = props => {
   const { user } = useUser();
-  return user.access === "teacher" ? (
-    <Route
-      path={props.path}
-      exact={props.exact}
-      render={() => props.children}
-    />
-  ) : user.access === "warden" ? (
-    <Redirect to="/warden" />
+  return user ? (
+    user.access === "teacher" ? (
+      <Route
+        path={props.path}
+        exact={props.exact}
+        render={() => props.children}
+      />
+    ) : user.access === "warden" ? (
+      <Redirect to="/warden" />
+    ) : (
+      <Redirect to="/" />
+    )
   ) : (
     <Redirect to="/" />
   );

@@ -6,6 +6,9 @@ import hostel from "./../../../img/hostel.jpg";
 import HostelGround from "./HostelGround";
 import ReadingRoom from "./ReadingRoom";
 import Button from "../../Styled/Button";
+import Loading from "../../Loading";
+import axios from "axios";
+import { useUser } from "../../../Context/userProvider";
 
 const Slot = () => {
   //State
@@ -14,6 +17,12 @@ const Slot = () => {
   const [selected, setSelected] = useState("meal");
   const [message, setMessage] = useState("");
   const [modal, setModal] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [message2, setMessage2] = useState("Response Submitted");
+  const [processing, setProcessing] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const { user } = useUser();
 
   //Component did Mount
   useEffect(() => {
@@ -21,17 +30,7 @@ const Slot = () => {
     if (time <= 8) {
       setMeal("Breakfast");
       setTime(["7-7:20AM", "7:20-7:40AM", "7:40-8:00AM"]);
-    } else if (time <= 14) {
-      setMeal("Lunch");
-      setTime([
-        "12-12:20PM",
-        "12:20-12:40PM",
-        "12:40-1:00PM",
-        "1-1:20PM",
-        "1:20-1:40PM",
-        "1:40-2:00PM",
-      ]);
-    } else {
+    } else if (time > 14) {
       setMeal("Dinner");
       setTime([
         "8-8:20PM",
@@ -48,6 +47,25 @@ const Slot = () => {
   const change = (t: string) => {
     setSelected(t);
   };
+
+  const submit = async () => {
+    setVisible(true);
+    setProcessing(true);
+    console.log(url);
+    try {
+      const res = await axios.put(url, {
+        rollNumber: user.rollNumber,
+        type: selected,
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setProcessing(false);
+      closeModal();
+    }
+  };
+
   const closeModal = () => {
     setModal(false);
   };
@@ -68,18 +86,27 @@ const Slot = () => {
           time={time}
           setMessage={setMessage}
           setModal={setModal}
+          setUrl={setUrl}
         />
       ) : selected === "ground" ? (
-        <HostelGround setMessage={setMessage} setModal={setModal} />
+        <HostelGround
+          setMessage={setMessage}
+          setModal={setModal}
+          setUrl={setUrl}
+        />
       ) : (
-        <ReadingRoom setMessage={setMessage} setModal={setModal} />
+        <ReadingRoom
+          setMessage={setMessage}
+          setModal={setModal}
+          setUrl={setUrl}
+        />
       )}
       {modal && (
         <StyledModal>
           <div className="alert">
             <p>{message}</p>
             <div className="btnContainer">
-              <button className="yes" onClick={closeModal}>
+              <button className="yes" onClick={submit}>
                 <span>Yes</span>
               </button>
               <button className="cancel" onClick={closeModal}>
@@ -89,6 +116,12 @@ const Slot = () => {
           </div>
         </StyledModal>
       )}
+      <Loading
+        message={message2}
+        visible={visible}
+        setVisible={setVisible}
+        loading={processing}
+      />
     </StyledSlot>
   );
 };

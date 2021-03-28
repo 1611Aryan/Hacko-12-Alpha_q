@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../Styled/Button";
 import Ground from "./Ground";
@@ -6,13 +7,40 @@ import Mess from "./Mess";
 import ReadingRoom from "./ReadingRoom";
 
 const Slots = () => {
+  //url
+  const URL =
+    process.env.NODE_ENV === "production"
+      ? "/slots/all"
+      : "http://localhost:5000/slots/all";
   //State
   const [selected, setSelected] = useState("");
+  const [students, setStudents] = useState<
+    | {
+        name: string;
+        rollNumber: string;
+        meal: string;
+        ground: string;
+        reading: string;
+      }[]
+    | null
+  >(null);
 
   //Handlers
   const clickHandler = (t: string) => {
     setSelected(t);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(URL);
+        console.log(res.data);
+        setStudents(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   return (
     <StyledSlots>
@@ -24,11 +52,11 @@ const Slots = () => {
         <Button m={"Reading Room "} onClick={() => clickHandler("reading")} />
       </ul>
       {selected === "mess" ? (
-        <Mess />
+        <Mess students={students} />
       ) : selected === "ground" ? (
-        <Ground />
+        <Ground students={students} />
       ) : selected === "reading" ? (
-        <ReadingRoom />
+        <ReadingRoom students={students} />
       ) : null}
     </StyledSlots>
   );

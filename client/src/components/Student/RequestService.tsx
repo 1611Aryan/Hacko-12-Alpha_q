@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import yellowGradient from "./../../img/yellow-gradient.jpg";
 import { useUser } from "../../Context/userProvider";
+import Loading from "../Loading";
 
 const RequestService: React.FC = () => {
   //URL
@@ -16,7 +17,7 @@ const RequestService: React.FC = () => {
 
   //State
   const [message, setMessage] = useState<null | string>(null);
-  const [modal, setmodal] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [response, setResponse] = useState<{
     name: string | null;
@@ -42,7 +43,7 @@ const RequestService: React.FC = () => {
   const SubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setProcessing(true);
-    setmodal(true);
+    setVisible(true);
     try {
       const res = await axios.post(URL, {
         name: response.name,
@@ -63,28 +64,12 @@ const RequestService: React.FC = () => {
     <StyledRequestService>
       <img src={yellowGradient} alt="" />
       <div className="overlay"></div>
-      {modal && (
-        <div className="loadingContainer">
-          {processing ? (
-            <div className="lds-roller">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          ) : (
-            <>
-              <p>{message}</p>
-              <button onClick={() => setmodal(false)}>Ok</button>
-            </>
-          )}
-        </div>
-      )}
-
+      <Loading
+        visible={visible}
+        setVisible={setVisible}
+        message={message}
+        loading={processing}
+      />
       <form onSubmit={SubmitHandler}>
         <label htmlFor="roomNumber">Room Number:</label>
         <input

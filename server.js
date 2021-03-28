@@ -18,10 +18,12 @@ app.use(express.json());
 const hostellerRouter = require(path.join(__dirname, "./Routes/hosteller"));
 const complaintsRouter = require(path.join(__dirname, "./Routes/complaints"));
 const studentsRouter = require(path.join(__dirname, "./Routes/students"));
+const slotsRouter = require("./Routes/slots");
 
 app.use("/student", hostellerRouter);
 app.use("/administrator", complaintsRouter);
 app.use("/teacher", studentsRouter);
+app.use("/slots", slotsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
@@ -32,21 +34,24 @@ if (process.env.NODE_ENV === "production") {
     express.static(path.join(__dirname, "client/build"))
   );
   app.use("/attendance", express.static(path.join(__dirname, "client/build")));
-  app.use("/admin", express.static(path.join(__dirname, "client/build")));
-  app.use("/admin/mess", express.static(path.join(__dirname, "client/build")));
+  app.use("/warden", express.static(path.join(__dirname, "client/build")));
+  app.use("/warden/mess", express.static(path.join(__dirname, "client/build")));
   app.use(
-    "/admin/attendance",
+    "/warden/attendance",
     express.static(path.join(__dirname, "client/build"))
   );
   app.use(
-    "/admin/complaints",
+    "/warden/complaints",
     express.static(path.join(__dirname, "client/build"))
   );
   app.use(
-    "/admin/students",
+    "/warden/students",
     express.static(path.join(__dirname, "client/build"))
   );
-  app.use("/admin/staff", express.static(path.join(__dirname, "client/build")));
+  app.use(
+    "/warden/staff",
+    express.static(path.join(__dirname, "client/build"))
+  );
 }
 
 app.listen(port, () => console.log(`Server Running on port ${port}`));

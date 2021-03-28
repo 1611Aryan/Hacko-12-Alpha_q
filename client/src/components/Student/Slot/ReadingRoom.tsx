@@ -5,7 +5,12 @@ import Divider from "../../Styled/Divider";
 const ReadingRoom: React.FC<{
   setMessage: React.Dispatch<React.SetStateAction<string>>;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ setMessage, setModal }) => {
+  setUrl: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ setMessage, setModal, setUrl }) => {
+  const URL =
+    process.env.NODE_ENV === "production"
+      ? "/slots"
+      : "http://localhost:5000/slots";
   const time = [
     "8-9AM",
     "9-10AM",
@@ -29,6 +34,7 @@ const ReadingRoom: React.FC<{
   const ClickHandler = (t: string) => {
     setModal(true);
     setMessage(`Confirm the slot for ${t}`);
+    setUrl(`${URL}/${t}`);
   };
 
   return (

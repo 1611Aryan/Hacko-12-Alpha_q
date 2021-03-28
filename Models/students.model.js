@@ -8,6 +8,7 @@ const studentSchema = new Schema(
     year: { type: String, required: true },
     batch: { type: String, required: true },
     submission: { type: Array },
+    marks: { type: Object },
   },
   {
     timestamps: true,

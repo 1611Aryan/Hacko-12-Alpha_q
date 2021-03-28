@@ -3,6 +3,7 @@ import Button from "../Styled/Button";
 import blackboard from "./../../img/blackboard.jpg";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Loading from "../Loading";
 
 const Marks = () => {
   //URL
@@ -10,6 +11,11 @@ const Marks = () => {
     process.env.NODE_ENV === "production"
       ? "/teacher"
       : "http://localhost:5000/teacher";
+
+  const MarksURL =
+    process.env.NODE_ENV === "production"
+      ? "/teacher/marks"
+      : "http://localhost:5000/teacher/marks";
 
   //State
   const [students, setStudents] = useState<
@@ -23,12 +29,20 @@ const Marks = () => {
     | null
   >(null);
   const [selected, setSelected] = useState(0);
+  const [response, setResponse] = useState({
+    name: "",
+    rollNumber: "",
+    marksObt: "",
+    marksTotal: "",
+  });
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const message = "Marks Saved";
 
   useEffect(() => {
     (async () => {
       try {
         const res = await axios.get(URL);
-
         setStudents(res.data);
       } catch (err) {
         throw err;
@@ -38,6 +52,43 @@ const Marks = () => {
 
   const ClickHandler = (i: number) => {
     setSelected(i);
+  };
+  const ChangeHandler = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setResponse({ ...response, [e.target.name]: e.target.value });
+  };
+
+  const category = (i: number) => {
+    if (i === 0) return "MST";
+    else if (i === 1) return "Sessional";
+    else return "EST";
+  };
+
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setVisible(true);
+    setLoading(true);
+    try {
+      const res = await axios.put(MarksURL, {
+        category: category(selected),
+        rollNumber: response.rollNumber,
+        marks: ` ${response.marksObt}/${response.marksTotal}`,
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      setResponse({
+        name: "",
+        rollNumber: "",
+        marksObt: "",
+        marksTotal: "",
+      });
+    }
   };
 
   return (
@@ -65,23 +116,63 @@ const Marks = () => {
           />
         </ul>
         <div className="formContainer">
-          <StyledForm>
+          <StyledForm onSubmit={submitHandler}>
             <label htmlFor="name">Name:</label>
-            <input type="text" list="students" required name="name" />
+            <input
+              type="text"
+              list="students"
+              required
+              name="name"
+              onChange={ChangeHandler}
+              value={response.name}
+            />
             <datalist id="students">
               {students &&
                 students.map((s, i) => (
                   <option key={i} value={s.name}></option>
                 ))}
             </datalist>
+            <label htmlFor="rollNumber">Roll Number:</label>
+            <input
+              type="text"
+              list="rollNumber"
+              required
+              name="rollNumber"
+              onChange={ChangeHandler}
+              value={response.rollNumber}
+            />
+            <datalist id="rollNumber">
+              {students &&
+                students.map((s, i) => (
+                  <option key={i} value={s.rollNumber}></option>
+                ))}
+            </datalist>
             <label htmlFor="marksObt">Marks Obtained:</label>
-            <input type="number" min={0} max={50} required name="marksObt" />
+            <input
+              type="text"
+              required
+              name="marksObt"
+              onChange={ChangeHandler}
+              value={response.marksObt}
+            />
             <label htmlFor="marksTotal">Total Marks:</label>
-            <input type="number" min={0} max={50} required name="marksTotal" />
+            <input
+              type="text"
+              required
+              name="marksTotal"
+              onChange={ChangeHandler}
+              value={response.marksTotal}
+            />
             <button>Add Marks</button>
           </StyledForm>
         </div>
       </StyledContent>
+      <Loading
+        visible={visible}
+        setVisible={setVisible}
+        loading={loading}
+        message={message}
+      />
     </StyledMarks>
   );
 };

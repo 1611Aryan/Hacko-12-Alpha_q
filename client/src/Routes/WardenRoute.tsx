@@ -7,14 +7,18 @@ const AdminRoute: React.FC<{
   exact?: boolean;
 }> = props => {
   const { user } = useUser();
-  return user.access === "warden" ? (
-    <Route
-      path={props.path}
-      exact={props.exact}
-      render={() => props.children}
-    />
-  ) : user.access === "teacher" ? (
-    <Redirect to="/teacher" />
+  return user ? (
+    user.access === "warden" ? (
+      <Route
+        path={props.path}
+        exact={props.exact}
+        render={() => props.children}
+      />
+    ) : user.access === "teacher" ? (
+      <Redirect to="/teacher" />
+    ) : (
+      <Redirect to="/" />
+    )
   ) : (
     <Redirect to="/" />
   );

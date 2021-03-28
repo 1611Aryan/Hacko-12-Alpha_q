@@ -2,7 +2,17 @@ import styled from "styled-components";
 import Button from "../../Styled/Button";
 import Divider from "../../Styled/Divider";
 
-const ReadingRoom = () => {
+const ReadingRoom: React.FC<{
+  students:
+    | {
+        name: string;
+        rollNumber: string;
+        meal: string;
+        ground: string;
+        reading: string;
+      }[]
+    | null;
+}> = ({ students }) => {
   const time = [
     "8-9AM",
     "9-10AM",
@@ -34,6 +44,20 @@ const ReadingRoom = () => {
           <Button key={index} m={t} />
         ))}
       </ul>
+      <ul className="students">
+        {students &&
+          students
+            .filter(student => student.reading !== "")
+            .map((student, index) => (
+              <li key={index}>
+                <div>
+                  <span>{student.reading}</span>
+                  <span>{student.name}</span>
+                  <span>{student.rollNumber}</span>
+                </div>
+              </li>
+            ))}
+      </ul>
     </StyledReadingRoom>
   );
 };
@@ -60,6 +84,27 @@ const StyledReadingRoom = styled.div`
     li {
       padding: 0.5rem 0.7rem;
       font-size: 0.8rem;
+    }
+  }
+  .students {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    li {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      border-bottom: 0.5px solid black;
+      font-size: clamp(0.7rem, 1vw, 1rem);
+      div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          min-width: 20%;
+          max-width: 23%;
+        }
+      }
     }
   }
 `;
