@@ -13,7 +13,13 @@ const Marks = () => {
       ? "/teacher"
       : "http://localhost:5000/teacher";
 
-  const [student, setStudent] = useState<any>("");
+  const [student, setStudent] = useState<any>({
+    marks: {
+      Sessional: "",
+      MST: "",
+      EST: "",
+    },
+  });
 
   const { user } = useUser();
 
