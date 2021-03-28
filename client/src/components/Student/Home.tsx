@@ -70,7 +70,7 @@ const StyledHome = styled.main`
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1rem 1rem clamp(0rem, 1vw, 1rem) 1rem;
     z-index: 2;
     h1 {
       font-size: 1.2rem;
@@ -80,13 +80,14 @@ const StyledHome = styled.main`
   .information {
     width: 100%;
     height: auto;
-    padding: 1rem 4rem 1rem 1rem;
+    padding: 1rem clamp(2rem, 3vw, 4rem) 1rem 1rem;
     border: 2px solid #fff;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     color: black;
+    font-size: clamp(0.8rem, 3vw, 1rem);
     .row {
       width: 100%;
       display: flex;
@@ -94,21 +95,13 @@ const StyledHome = styled.main`
       padding: 1rem 0;
     }
   }
-  .quote {
-    margin-top: auto;
-    align-self: center;
-    width: 60%;
-    font-weight: 600;
-    margin-bottom: 3rem;
-    font-size: 2.5rem;
-    text-align: center;
-    font-family: "Satisfy", cursive;
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  }
   .illus {
     z-index: -1;
     object-fit: cover;
+    margin-top: auto;
+    @media (max-width: 500px) {
+      transform: scale(1.6);
+    }
   }
 `;
 

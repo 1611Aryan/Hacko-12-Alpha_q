@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Alert = () => {
+const Alerts = () => {
   return (
     <StyledAlert>
       <h1>Create an Alert </h1>
@@ -8,11 +8,6 @@ const Alert = () => {
         <label htmlFor="to">To:</label>
         <select name="to">
           <option value="All">All</option>
-          <option value="A-Block">A-Block</option>
-          <option value="B-Block">B-Block</option>
-          <option value="C-Block">C-Block</option>
-          <option value="D-Block">D-Block</option>
-          <option value="E-Block">E-Block</option>
         </select>
         <label htmlFor="message">Message</label>
         <textarea name="message"></textarea>
@@ -51,7 +46,7 @@ const StyledAlert = styled.section`
     justify-content: space-evenly;
     background: #2b2b2b;
     border: 2px solid white;
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-size: 1rem;
     color: white;
     select,
     option,
@@ -70,8 +65,11 @@ const StyledAlert = styled.section`
   @media (max-width: 500px) {
     form {
       width: 85%;
+      button {
+        background: white;
+      }
     }
   }
 `;
 
-export default Alert;
+export default Alerts;

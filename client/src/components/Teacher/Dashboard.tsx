@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../Context/userProvider";
 
-const AdminPanel: React.FC<{
+const Dashboard: React.FC<{
   setLogin: any;
 }> = ({ setLogin }) => {
   //
@@ -22,15 +22,15 @@ const AdminPanel: React.FC<{
   };
 
   return (
-    <StyledAdminPanel>
+    <StyledDashboard>
       <StyledOption
         style={{
           background: "#FF6E6E",
         }}
       >
         <div className="overlay"></div>
-        <Link to="/admin/mess">
-          <span> Mess Status</span>
+        <Link to="/teacher/schedule">
+          <span>Schedule</span>
         </Link>
       </StyledOption>
       <StyledOption
@@ -39,8 +39,8 @@ const AdminPanel: React.FC<{
         }}
       >
         <div className="overlay"></div>
-        <Link to="/admin/students">
-          <span> Students</span>
+        <Link to="/teacher/students">
+          <span>Students</span>
         </Link>
       </StyledOption>
 
@@ -50,8 +50,8 @@ const AdminPanel: React.FC<{
         }}
       >
         <div className="overlay"></div>
-        <Link to="/admin/complaints">
-          <span> Complaints</span>
+        <Link to="/teacher/assignment">
+          <span>Assignments</span>
         </Link>
       </StyledOption>
       <StyledOption
@@ -60,8 +60,8 @@ const AdminPanel: React.FC<{
         }}
       >
         <div className="overlay"></div>
-        <Link to="/admin/slots">
-          <span>Slots</span>
+        <Link to="/teacher/addMarks">
+          <span>Marks</span>
         </Link>
       </StyledOption>
       <StyledOption
@@ -70,7 +70,7 @@ const AdminPanel: React.FC<{
         }}
       >
         <div className="overlay"></div>
-        <Link to="/admin/alert">
+        <Link to="/teacher/alert">
           <span>Send Alerts</span>
         </Link>
       </StyledOption>
@@ -87,11 +87,11 @@ const AdminPanel: React.FC<{
           </span>
         </Link>
       </StyledOption>
-    </StyledAdminPanel>
+    </StyledDashboard>
   );
 };
 
-const StyledAdminPanel = styled.section`
+const StyledDashboard = styled.section`
   width: 100%;
   height: calc(100vh - var(--navBarHeight));
   overflow: hidden;
@@ -173,4 +173,4 @@ const StyledOption = styled.div`
   }
 `;
 
-export default AdminPanel;
+export default Dashboard;

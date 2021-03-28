@@ -152,7 +152,6 @@ const StyledRequestService = styled.section`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     color: white;
     p {
       text-align: center;
@@ -316,6 +315,7 @@ const StyledRequestService = styled.section`
           transform: translateX(0);
         }
       }
+    }
   }
   @media (max-width: 650px) {
     form {

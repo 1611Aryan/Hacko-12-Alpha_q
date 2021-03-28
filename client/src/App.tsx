@@ -10,18 +10,15 @@ import Attendance from "./components/Student/Attendance";
 
 import Login from "./components/login";
 import useLocalStorage from "./Hooks/useLocalStorage";
-import AdminPanel from "./components/Admin/AdminPanel";
-import MessStatus from "./components/Admin/MessStatus";
-import SlotAdmin from "./components/Admin/Slots";
-import Complaints from "./components/Admin/Complaints";
+import Warden from "./components/Admin";
 
-import Students from "./components/Admin/Students";
-import Alert from "./components/Admin/Alert";
 import Error from "./components/Error";
 import Slot from "./components/Student/Slot";
 import Notifications from "./components/Student/Notifications";
-import AdminRoute from "./Routes/AdminRoute";
+import WardenRoute from "./Routes/WardenRoute";
 import StudentRoute from "./Routes/StudentRoute";
+import TeacherRoute from "./Routes/TeacherRoute";
+import Teacher from "./components/Teacher";
 
 function App() {
   //state
@@ -72,24 +69,14 @@ function App() {
               <Attendance />
             </StudentRoute>
             {/*Admin Routes*/}
-            <AdminRoute path="/admin" exact>
-              <AdminPanel setLogin={setLogin} />
-            </AdminRoute>
-            <AdminRoute path="/admin/mess" exact>
-              <MessStatus />
-            </AdminRoute>
-            <AdminRoute path="/admin/slots" exact>
-              <SlotAdmin />
-            </AdminRoute>
-            <AdminRoute path="/admin/complaints" exact>
-              <Complaints />
-            </AdminRoute>
-            <AdminRoute path="/admin/students" exact>
-              <Students />
-            </AdminRoute>
-            <AdminRoute path="/admin/alert" exact>
-              <Alert />
-            </AdminRoute>
+            <WardenRoute path="/warden">
+              <Warden setLogin={setLogin} />
+            </WardenRoute>
+
+            {/*Teacher Routes*/}
+            <TeacherRoute path="/teacher">
+              <Teacher setLogin={setLogin} />
+            </TeacherRoute>
             <Route path="/">
               <Error />
             </Route>

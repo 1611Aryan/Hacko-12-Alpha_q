@@ -17,9 +17,11 @@ app.use(express.json());
 
 const hostellerRouter = require(path.join(__dirname, "./Routes/hosteller"));
 const complaintsRouter = require(path.join(__dirname, "./Routes/complaints"));
+const studentsRouter = require(path.join(__dirname, "./Routes/students"));
 
 app.use("/student", hostellerRouter);
 app.use("/administrator", complaintsRouter);
+app.use("/teacher", studentsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

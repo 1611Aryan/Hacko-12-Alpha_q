@@ -1,20 +1,23 @@
 import { useUser } from "../Context/userProvider";
 import { Route, Redirect } from "react-router-dom";
 
-const AdminRoute: React.FC<{
+const TeacherRoute: React.FC<{
   children: JSX.Element;
   path: string;
-  exact: boolean;
+  exact?: boolean;
 }> = props => {
   const { user } = useUser();
-  return user.access === "admin" ? (
+  return user.access === "teacher" ? (
     <Route
       path={props.path}
       exact={props.exact}
       render={() => props.children}
     />
+  ) : user.access === "warden" ? (
+    <Redirect to="/warden" />
   ) : (
     <Redirect to="/" />
   );
 };
-export default AdminRoute;
+
+export default TeacherRoute;

@@ -34,7 +34,7 @@ const Students = () => {
     })();
   }, [URL]);
 
-  const randomAttendance = () => Math.floor(Math.random() * 60 + 30);
+  const randomAttendance = () => Math.floor(Math.random() * 50 + 40);
 
   return (
     <StyledStudents>
@@ -55,8 +55,6 @@ const Students = () => {
                   <div>
                     <span>Name: {s.name}</span>
                     <span>Roll Number: {s.rollNumber}</span>
-                    <span>Year: {s.year}</span>
-                    <span>Hostel: {s.hostel}</span>
                     <span>Attendance: {randomAttendance()}%</span>
                   </div>
                 </li>

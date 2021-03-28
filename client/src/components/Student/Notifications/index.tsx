@@ -84,7 +84,7 @@ const StyledNotification = styled.div`
     }
     ul {
       list-style-type: none;
-      font-size: 1rem;
+      font-size: clamp(0.8rem, 2vw, 1rem);
       padding: 0.5rem;
       li {
         margin-top: 1rem;
@@ -95,7 +95,7 @@ const StyledNotification = styled.div`
         svg {
           cursor: pointer;
           color: red;
-          font-size: 1.2rem;
+          font-size: clamp(1rem, 2vw, 1.2rem);
           &:hover {
             text-decoration: line-through;
           }

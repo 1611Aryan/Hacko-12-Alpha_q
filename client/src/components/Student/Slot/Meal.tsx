@@ -54,28 +54,9 @@ const StyledMeal = styled.main`
   height: calc(100vh - var(--navBarHeight));
   color: white;
   padding: 0 1rem;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-  }
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(1px);
-    z-index: 2;
-  }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 3vw, 1.5rem);
   }
   ul {
     width: 100%;
@@ -93,6 +74,7 @@ const StyledMeal = styled.main`
   p {
     margin: 1rem 0;
     color: #fff238;
+    font-size: clamp(0.8rem, 3vw, 1rem);
     &:hover {
       color: #fff45d;
     }

@@ -149,7 +149,7 @@ const StyledModal = styled.div`
   align-items: center;
   .alert {
     width: 30%;
-    min-height: 45%;
+    height: 45%;
     padding: 3rem 2rem 2rem;
     background: rgba(44, 44, 44, 0.8);
     border-radius: 20px;
@@ -160,7 +160,7 @@ const StyledModal = styled.div`
     p {
       width: 100%;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: clamp(1rem, 3vw, 1.5rem);
     }
     .btnContainer {
       margin-top: 1rem;
@@ -170,14 +170,14 @@ const StyledModal = styled.div`
       align-items: center;
       button {
         width: 40%;
-        padding: 0.7rem 1rem;
+        padding: clamp(0.5rem, 2vw, 0.7rem) clamp(0.7rem, 2vw, 1rem);
         position: relative;
         overflow: hidden;
         transition: all ease-out 0.1s;
         border-radius: 5px;
         border: 1px solid black;
         span {
-          font-size: 1rem;
+          font-size: clamp(0.8rem, 3vw, 1rem);
         }
       }
       .cancel:hover {
@@ -188,6 +188,12 @@ const StyledModal = styled.div`
         color: green;
         background-color: #efffeb;
       }
+    }
+  }
+  @media (max-width: 500px) {
+    .alert {
+      width: 80%;
+      height: 35%;
     }
   }
 `;

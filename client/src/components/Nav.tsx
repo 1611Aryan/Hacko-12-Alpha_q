@@ -20,7 +20,7 @@ const Nav: React.FC<NavInterface> = ({
   setNotifStatus,
 }) => {
   //
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   //Handlers
   const showSideBar = () => {
@@ -32,7 +32,7 @@ const Nav: React.FC<NavInterface> = ({
 
   return (
     <StyledNav>
-      <Link to={user?.access === "student" ? "/" : "/admin"}>
+      <Link to={user?.access === "student" ? "/" : "/warden"}>
         <h1>
           ThaparDaze&nbsp;
           <FontAwesomeIcon icon={faBuilding} />
@@ -62,7 +62,7 @@ const StyledNav = styled.nav`
   z-index: 90;
   width: 100vw;
   height: var(--navBarHeight);
-  padding: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(0.35rem, 2vw, 1rem);
   background: rgba(34, 40, 49, 0.95);
   color: #eee;
   display: flex;
@@ -71,7 +71,7 @@ const StyledNav = styled.nav`
   a {
   }
   h1 {
-    font-size: clamp(1.15rem, 3vw, 2rem);
+    font-size: clamp(1rem, 3vw, 2rem);
   }
 `;
 
@@ -80,7 +80,9 @@ const StyledOptions = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: clamp(0.9rem, 2vw, 1.35rem);
-
+  @media (max-width: 500px) {
+    width: 50%;
+  }
   svg {
     cursor: pointer;
   }

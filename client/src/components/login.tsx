@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import loginBg from "./../img/login.jpg";
@@ -16,6 +17,9 @@ const Login: React.FC<{
     process.env.NODE_ENV === "production"
       ? "/student/login"
       : "http://localhost:5000/student/login";
+
+  //
+  const history = useHistory();
 
   //state
   const [credentials, setCredentials] = useState<{
@@ -46,13 +50,15 @@ const Login: React.FC<{
       if (res.data.success) {
         setUser(res.data.user);
         setMessage(null);
-        if (res.data.user.access === "admin") {
-          setLogin({ status: true, access: "admin" });
-          window.history.pushState({}, "", "/admin");
-          window.location.reload();
-        } else {
+        if (res.data.user.access === "warden") {
+          setLogin({ status: true, access: "warden" });
+          history.push("/warden");
+        } else if (res.data.user.access === "student") {
           setLogin({ status: true, access: "student" });
-          window.history.pushState({}, "", "/");
+          history.push("/");
+        } else if (res.data.user.access === "teacher") {
+          setLogin({ status: true, access: "teacher" });
+          history.push("/teacher");
         }
       } else {
         setMessage(res.data.message);
@@ -155,7 +161,7 @@ const StyledHeader = styled.header`
   align-items: center;
   width: 100%;
   height: var(--navBarHeight);
-  padding: 1rem 2rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
   overflow: hidden;
   .logo {
     width: 10%;
