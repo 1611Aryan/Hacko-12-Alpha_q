@@ -40,6 +40,8 @@ const Slot = () => {
         "9:20-9:40PM",
         "9:40-10:00PM",
       ]);
+    } else {
+      setMeal("Lunch");
     }
   }, []);
 

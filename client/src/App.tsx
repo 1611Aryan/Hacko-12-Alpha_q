@@ -19,6 +19,7 @@ import WardenRoute from "./Routes/WardenRoute";
 import StudentRoute from "./Routes/StudentRoute";
 import TeacherRoute from "./Routes/TeacherRoute";
 import Teacher from "./components/Teacher";
+import Marks from "./components/Student/Marks";
 
 function App() {
   //state
@@ -67,6 +68,9 @@ function App() {
             </StudentRoute>
             <StudentRoute path="/attendance" exact>
               <Attendance />
+            </StudentRoute>
+            <StudentRoute path="/marks" exact>
+              <Marks />
             </StudentRoute>
             {/*Admin Routes*/}
             <WardenRoute path="/warden">

@@ -28,17 +28,23 @@ const Meal: React.FC<{
   return (
     <StyledMeal>
       <div>
-        <h3>Confirm Your Slot for {meal}</h3>
-        <Divider />
-        <ul>
-          {time.map((t, index) => (
-            <Button key={index} m={t} onClick={() => openModal(0, t)} />
-          ))}
-        </ul>
-        <p>
-          If no slot is confirmed, you'll automatically be assigned the last
-          given slot.
-        </p>
+        {meal !== "Lunch" ? (
+          <>
+            <h3>Confirm Your Slot for {meal}</h3>
+            <Divider />
+            <ul>
+              {time.map((t, index) => (
+                <Button key={index} m={t} onClick={() => openModal(0, t)} />
+              ))}
+            </ul>
+            <p>
+              If no slot is confirmed, you'll automatically be assigned the last
+              given slot.
+            </p>
+          </>
+        ) : (
+          ""
+        )}
       </div>
       <div className="eating">
         <h3>Not having {meal} today?</h3>

@@ -11,6 +11,7 @@ const Notifications: React.FC<{
   const [messages, setMessages] = useState([
     "Laundry Services available on Monday and Thursday from 3-5PM",
     "Electrical Assignment-2 Due on Friday",
+    "Helloo ~ teacher",
   ]);
 
   //Handlers
@@ -28,7 +29,7 @@ const Notifications: React.FC<{
         <h3>Notifications</h3>
         <ul>
           {messages.map((message, index) => (
-            <li onClick={() => deleteNotification(index)}>
+            <li key={index} onClick={() => deleteNotification(index)}>
               <p>{message}</p>
 
               <FontAwesomeIcon icon={faTrashAlt} />

@@ -77,7 +77,7 @@ const Login: React.FC<{
       <StyledHeader>
         <h1>
           <a href="/">
-            HostelDaze &nbsp; <FontAwesomeIcon icon={faBuilding} />
+            ThaparDaze &nbsp; <FontAwesomeIcon icon={faBuilding} />
           </a>
         </h1>
         <a href="http://www.thapar.edu/" className="logo">
@@ -90,7 +90,7 @@ const Login: React.FC<{
       <div className="content">
         <StyledForm onSubmit={submitHandler}>
           <p>{message && message}</p>
-          <label htmlFor="rollNumber">Roll Number: </label>
+          <label htmlFor="rollNumber">Id: </label>
           <input
             type="text"
             name="rollNumber"

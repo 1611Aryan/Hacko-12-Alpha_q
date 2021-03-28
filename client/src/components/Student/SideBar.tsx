@@ -59,6 +59,9 @@ const SideBar: React.FC<SideBarInterface> = ({
               <li onClick={HideSideBar}>
                 <Link to="/attendance">Attendance</Link>
               </li>
+              <li onClick={HideSideBar}>
+                <Link to="/marks">Marks</Link>
+              </li>
             </>
           ) : (
             ""
